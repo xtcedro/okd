@@ -1,0 +1,98 @@
+/* Buttons */
+.cta-button {
+  display: inline-block;
+  padding: 0.5rem 1rem; /* Reduced padding for smaller size */
+  background-color: #FFD700; /* Gold */
+  color: #001a3d; /* Darker Blue */
+  font-weight: bold;
+  border: 2px solid #FFD700;
+  border-radius: 4px; /* Slightly smaller rounded corners */
+  text-decoration: none;
+  font-size: 0.9rem; /* Reduced font size */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0.3rem; /* Reduced margin for compact layout */
+}
+
+.cta-button:hover {
+  background-color: #ffcc00; /* Lighter Gold */
+  transform: scale(1.05);
+}
+
+/* Secondary Button */
+.cta-button.secondary {
+  background-color: transparent;
+  color: #FFD700;
+  border: 2px solid #FFD700;
+}
+
+.cta-button.secondary:hover {
+  background-color: #FFD700;
+  color: #001a3d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cta-button {
+    width: auto; /* Avoid full-width buttons unless necessary */
+    text-align: center;
+    padding: 0.4rem 0.8rem; /* Further reduce padding for smaller screens */
+    font-size: 0.85rem; /* Adjusted for mobile readability */
+  }
+}
+
+/* Social Buttons */
+.social-buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Social Button Styles */
+.social-button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Twitter Button */
+.social-button.twitter {
+  background-color: #1DA1F2; /* Twitter Blue */
+  color: white;
+}
+
+.social-button.twitter:hover {
+  background-color: #0d8bdb;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(29, 161, 242, 0.3);
+}
+
+/* Facebook Button */
+.social-button.facebook {
+  background-color: #1877F2; /* Facebook Blue */
+  color: white;
+}
+
+.social-button.facebook:hover {
+  background-color: #166fe5;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(24, 119, 242, 0.3);
+}
+
+/* GitHub Button */
+.social-button.github {
+  background-color: #333; /* GitHub Dark */
+  color: white;
+}
+
+.social-button.github:hover {
+  background-color: #24292e;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(36, 41, 46, 0.3);
+}
