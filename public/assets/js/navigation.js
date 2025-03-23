@@ -18,6 +18,7 @@ export function setupNavigation() {
                 <ul class="nav-links">
                     <li><a href="index.html">🏠 Home</a></li>
                     <li><a href="about.html">🧑‍💻 About Us</a></li>
+                    <li><a href="about2.html">🧑‍💻 About Pedro M. Dominguez</a></li>
                     <li><a href="chatbot.html">🤖 AI Chatbot</a></li>
                     <li><a href="letter.html">📜 Open Letter</a></li>
                     <li><a href="contact.html">📬 Contact</a></li>
