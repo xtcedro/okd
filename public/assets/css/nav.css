@@ -1,0 +1,94 @@
+/* nav.css */
+
+/* ================================
+   🎨 Theme Variables
+================================= */
+:root {
+  --nav-bg: #000000;
+  --nav-gold: #FFD700;
+  --nav-text: #ffffff;
+  --nav-hover: #e6c200;
+  --nav-border: #333;
+}
+
+/* ================================
+   📌 Navigation Bar
+================================= */
+.navbar {
+  background-color: var(--nav-bg);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--nav-border);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* ================================
+   🍔 Hamburger Button
+================================= */
+.hamburger-menu {
+  background: none;
+  color: var(--nav-gold);
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* ================================
+   📂 Navigation Links
+================================= */
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links.hidden {
+  display: none;
+}
+
+.nav-links.visible {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* ================================
+   🔗 Nav Link Styling
+================================= */
+.nav-links a {
+  text-decoration: none;
+  color: var(--nav-text);
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--nav-hover);
+}
+
+.nav-links a.active {
+  color: var(--nav-gold);
+  border-bottom: 2px solid var(--nav-gold);
+}
+
+/* ================================
+   📱 Mobile Responsive
+================================= */
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+}
