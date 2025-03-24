@@ -25,7 +25,7 @@ export function initializeChatbot() {
             });
 
             const data = await response.json();
-            appendMessage("bot", "Dominguez Tech Solutions AI Assistant 🤖", formatMessage(data.reply), true);
+            appendMessage("bot", "OK Devs AI Assistant 🤖", formatMessage(data.reply), true);
         } catch (error) {
             console.error("Error fetching AI introduction:", error);
         }
