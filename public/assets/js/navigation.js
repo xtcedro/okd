@@ -15,6 +15,9 @@ export function setupNavigation() {
                 <li><a href="chatbot.html">📜 AI Chatbot</a></li>
                 <li><a href="contact.html">📬 Contact Us</a></li>
             </ul>
+        <div class="nav-container">
+          <a href="login.html" class="nav-button" id="login-link">🫅 Admin Login</a>
+        </div>
         </div>
     `;
 
