@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Admin Settings | OKDevs" />
+  <meta name="author" content="Pedro Dominguez" />
+  <title>Admin Settings - OKDevs</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="assets/js/script.js"></script>
+</head>
+<body>
+  <nav class="navbar"></nav>
+
+  <main>
+    <section class="settings-form-wrapper">
+      <h1 style="text-align: center; color: gold; margin-bottom: 1rem;">
+        ⚙️ Site Settings - OKDevs
+      </h1>
+
+      <!-- ✅ Current Info Section -->
+      <div class="current-settings" style="margin-bottom: 2rem; background:#0f172a; color: #f5f5f5; padding: 1.5rem; border-radius: 10px; border-left: 5px solid gold;">
+        <h2 style="color: gold; font-size: 1.3rem; margin-bottom: 1rem;">Current Information</h2>
+        <p><strong>Website Title:</strong> <span id="currentSiteTitle">Loading...</span></p>
+        <p><strong>Contact Email:</strong> <span id="currentContactEmail">Loading...</span></p>
+        <p><strong>Business Phone:</strong> <span id="currentBusinessPhone">Loading...</span></p>
+        <p><strong>Homepage Banner:</strong> <span id="currentHomepageBanner">Loading...</span></p>
+      </div>
+
+      <!-- ✅ Editable Form -->
+      <form class="settings-form">
+        <div class="form-group">
+          <label for="siteTitle">Website Title</label>
+          <input type="text" id="siteTitle" name="siteTitle" />
+        </div>
+
+        <div class="form-group">
+          <label for="contactEmail">Contact Email</label>
+          <input type="email" id="contactEmail" name="contactEmail" />
+        </div>
+
+        <div class="form-group">
+          <label for="businessPhone">Business Phone</label>
+          <input type="tel" id="businessPhone" name="businessPhone" />
+        </div>
+
+        <div class="form-group">
+          <label for="homepageBanner">Homepage Banner Title</label>
+          <input type="text" id="homepageBanner" name="homepageBanner" />
+        </div>
+
+        <button type="submit" class="btn">Save Settings</button>
+      </form>
+    </section>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const form = document.querySelector(".settings-form");
+
+      try {
+        const res = await fetch("/api/settings?site=okdevs");
+        const data = await res.json();
+
+        form.siteTitle.value = data.site_title;
+        form.contactEmail.value = data.contact_email;
+        form.businessPhone.value = data.business_phone;
+        form.homepageBanner.value = data.homepage_banner;
+
+        document.getElementById("currentSiteTitle").textContent = data.site_title;
+        document.getElementById("currentContactEmail").textContent = data.contact_email;
+        document.getElementById("currentBusinessPhone").textContent = data.business_phone;
+        document.getElementById("currentHomepageBanner").textContent = data.homepage_banner;
+      } catch (err) {
+        alert("⚠️ Failed to load settings.");
+        console.error(err.message);
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const updatedSettings = {
+          siteTitle: form.siteTitle.value,
+          contactEmail: form.contactEmail.value,
+          businessPhone: form.businessPhone.value,
+          homepageBanner: form.homepageBanner.value
+        };
+
+        try {
+          const res = await fetch("/api/settings?site=okdevs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedSettings)
+          });
+
+          const data = await res.json();
+          alert("✅ Settings saved successfully.");
+          location.reload();
+        } catch (err) {
+          alert("❌ Failed to save settings.");
+          console.error(err.message);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
