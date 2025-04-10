@@ -1,0 +1,37 @@
+/* Logout Page */
+.logout-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: #0a0a0a; /* Dark black background */
+  padding: 2rem;
+}
+
+.logout-message-wrapper {
+  text-align: center;
+  background-color: #0f172a; /* Dark blue tone */
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.2);
+  border-left: 5px solid #00bfff; /* Accent blue */
+  color: #f0f0f0;
+}
+
+.logout-message-wrapper h1 {
+  font-size: 2rem;
+  color: #00bfff;
+  margin-bottom: 1rem;
+}
+
+.logout-message-wrapper p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  animation: pulseText 1.5s infinite;
+}
+
+@keyframes pulseText {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
