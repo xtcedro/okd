@@ -19,7 +19,7 @@ app.use(express.static("public"));
 // ✅ Register Stripe routes
 app.use("/api/stripe", stripeRoutes);
 app.use("/api/admin", adminRoutes);
-
+app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/chat", chatRoutes);
 
