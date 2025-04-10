@@ -1,39 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact OK Devs for inquiries and support.">
-  <title>Contact Us - OK Devs</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact OKDevs for web development and tech solutions in Oklahoma City." />
+  <title>Contact Us - OKDevs</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <!-- JavaScript -->
   <script type="module" src="assets/js/script.js"></script>
 </head>
 <body>
-
-
   <!-- Navigation Bar -->
   <nav class="navbar"></nav>
 
-  <!-- Main Content -->
-  <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <h1>📬 Contact OK Devs 📬</h1>
-      <p>
-        💬 Got questions? We're here to help! Stay tuned for updates on how to connect with us.
-      </p>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>📬 Let's Connect with OKDevs</h1>
+    <p>
+      Have a tech project, need development help, or want to collaborate? 
+      <b>OKDevs</b> is committed to helping individuals and businesses grow through technology. 💻
+    </p>
+  </section>
 
-    <!-- Contact Information Section -->
-    <section class="contact-info">
-      <h2>📞 How to Reach Us 📞</h2>
-      <p><em>We’re working on setting up our official contact channels.</em></p>
-      <p class="coming-soon"><em>🚀 <strong>Coming Soon</strong> 🚀</em></p>
-    </section>
-  </main>
+  <!-- Contact Information Section -->
+  <section class="contact-info">
+    <h2>📞 Contact Details</h2>
+    <p>Reach out to us through the following channels:</p>
+    <ul>
+      <li>
+        <i class="fas fa-envelope"></i>
+        Email: <a id="contact-email" href="mailto:">Loading...</a>
+      </li>
+      <li>
+        <i class="fas fa-phone-alt"></i>
+        Phone: <span id="contact-phone">Loading...</span>
+      </li>
+      <li>
+        <i class="fas fa-map-marker-alt"></i>
+        Location: Oklahoma City, OK
+      </li>
+    </ul>
+  </section>
 
   <!-- Footer Section -->
-  <div id="footer"></div>
+  <footer id="footer"></footer>
 
+  <!-- Script to Fetch Settings -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const res = await fetch("/api/settings?site=okdevs");
+        const data = await res.json();
+
+        document.getElementById("contact-email").textContent = data.contact_email;
+        document.getElementById("contact-email").href = "mailto:" + data.contact_email;
+        document.getElementById("contact-phone").textContent = data.business_phone;
+      } catch (err) {
+        console.warn("⚠️ Failed to load contact info.");
+      }
+    });
+  </script>
 </body>
 </html>
