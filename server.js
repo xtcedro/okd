@@ -6,6 +6,7 @@ import appointmentRoutes from "./routes/appointments.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import stripeRoutes from "./routes/stripe.js"; // ✅ ESM Import
 import adminRoutes from "./routes/adminRoutes.js"; // ✅ ESM Import
+import dashboardRoutes from "./routes/dashboardRoutes.js"; // ✅ ESM Import
 
 dotenv.config();
 const app = express();
