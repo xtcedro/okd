@@ -1,47 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("#loginForm");
-  const usernameInput = document.querySelector("#username");
-  const passwordInput = document.querySelector("#password");
-  const messageBox = document.querySelector("#loginMessage");
+  const form = document.getElementById("loginForm");
+  const loginMessage = document.getElementById("loginMessage");
 
-  if (!form || !usernameInput || !passwordInput || !messageBox) {
-    console.warn("Login form elements not found.");
-    return;
-  }
+  // Change this depending on the site you're on
+  const siteKey = "okdevs"; // or "heavenlyroofing", "domtech"
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
-
-    if (!username || !password) {
-      messageBox.textContent = "❌ Please enter both username and password.";
-      return;
-    }
+    const username = form.username.value;
+    const password = form.password.value;
 
     try {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, siteKey })
       });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        messageBox.textContent = `❌ ${data.error || "Login failed"}`;
-        return;
+      if (res.ok) {
+        localStorage.setItem("adminToken", data.token);
+        loginMessage.textContent = "✅ Login successful! Redirecting...";
+        setTimeout(() => {
+          window.location.href = "admin-dashboard.html";
+        }, 1000);
+      } else {
+        loginMessage.textContent = `❌ ${data.error}`;
       }
-
-      localStorage.setItem("adminToken", data.token);
-      messageBox.textContent = "✅ Login successful. Redirecting...";
-
-      setTimeout(() => {
-        window.location.href = "/admin-dashboard.html";
-      }, 1200);
     } catch (err) {
-      messageBox.textContent = `❌ ${err.message}`;
+      loginMessage.textContent = "❌ Server error. Please try again later.";
+      console.error("Login Error:", err.message);
     }
   });
 });
