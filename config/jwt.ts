@@ -1,0 +1,1 @@
+export const adminSecret = Deno.env.get("JWT_SECRET") || "your-secret-key";
