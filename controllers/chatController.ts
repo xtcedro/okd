@@ -66,7 +66,7 @@ How can I assist you today?
     const chat = await model.startChat({
       history: [],
       generationConfig: {
-        maxOutputTokens: 1000,
+        maxOutputTokens: 300,
         temperature: 0.7,
       },
     });
