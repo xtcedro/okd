@@ -7,7 +7,7 @@ export function setupNavigation() {
   const guestNav = `
     <div class="nav-left">
       <button class="hamburger-menu" id="menu-toggle" aria-label="Open navigation">☰</button>
-      <span class="nav-title">OKDevs</span>
+      <span class="nav-title">Oklahoma Developers</span>
     </div>
     <div class="menu-container">
       <div class="sidebar hidden" id="sidebar-menu">
