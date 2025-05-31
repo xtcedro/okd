@@ -1,82 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Schedule your appointment with OKDevs, your trusted tech partner in Oklahoma City.">
-    <title>Submit Appointment | OKDevs</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="assets/js/script.js" defer></script>
-    <script src="assets/js/load-components.js" defer></script>
-    <script src="assets/js/auth-navigation.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book a free appointment with OK Devs – helping Oklahoma grow with fast, modern tech solutions." />
+  <meta name="author" content="Pedro Dominguez" />
+  <title>Book Appointment | OK Devs</title>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <script type="module" src="../../assets/js/script.js"></script>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar"></nav>
+  <!-- Navigation -->
+  <nav class="navbar"></nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h1 class="hero-title">📅 Schedule Your Tech Appointment 🌟</h1>
-        <blockquote class="hero-quote">
-            💡 <em>"Innovative tech solutions tailored to your needs!"</em> 💻
-        </blockquote>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Book Your Appointment 🗓️</h1>
+    <p>We're ready to help your local business grow. Choose a service and schedule below.</p>
+  </section>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Appointments Section -->
-        <section class="appointments-section">
-            <h2 class="section-title">📅 Schedule Your Appointment 🚀</h2>
-            <form class="appointment-form" id="appointmentForm">
-                <div class="form-group">
-                    <label for="name">Full Name:</label>
-                    <input type="text" id="name" name="name" placeholder="John Doe" required maxlength="50">
-                </div>
+  <!-- Appointment Form -->
+  <section class="appointment-booker">
+    <form id="appointmentForm" class="appointment-form">
+      <div class="form-group">
+        <label for="name">👤 Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+      </div>
 
-                <div class="form-group">
-                    <label for="phone">Phone Number:</label>
-                    <input type="tel" id="phone" name="phone" placeholder="1234567890" required pattern="[0-9]{10}">
-                </div>
+      <div class="form-group">
+        <label for="phone">📞 Your Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="10-digit phone number" required />
+      </div>
 
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
-                </div>
+      <div class="form-group">
+        <label for="email">📧 Your Email (Optional)</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" />
+      </div>
 
-                <div class="form-group">
-                    <label for="appointment_date">Preferred Date:</label>
-                    <input type="date" id="appointment_date" name="appointment_date" required>
-                </div>
+      <div class="form-group">
+        <label for="service">🛠️ Choose a Service</label>
+        <select id="service" name="service" required>
+          <option value="" disabled selected>🔽 Select a service</option>
+          <option value="website-build">🌐 Build My Business Website</option>
+          <option value="automation-consult">⚙️ Automation or Tech Consult</option>
+          <option value="digital-tools">📲 Appointments & Contact Systems</option>
+          <option value="ai-assist">🤖 AI Chatbot Setup</option>
+        </select>
+      </div>
 
-                <div class="form-group">
-                    <label for="appointment_time">Preferred Time:</label>
-                    <input type="time" id="appointment_time" name="appointment_time" required>
-                </div>
+      <div class="form-group">
+        <label for="date">📅 Preferred Date</label>
+        <input type="date" id="date" name="date" required />
+      </div>
 
-                <div class="form-group">
-                    <label for="service">Service Type:</label>
-                    <select id="service" name="service" required>
-                        <option value="" disabled selected>Select a service</option>
-                        <option value="web-development">Web Development</option>
-                        <option value="software-development">Software Development</option>
-                        <option value="consultation">Consultation</option>
-                        <option value="custom-solution">Custom Solution</option>
-                    </select>
-                </div>
+      <div class="form-group">
+        <label for="time">⏰ Preferred Time</label>
+        <input type="time" id="time" name="time" required />
+      </div>
 
-                <div class="form-group">
-                    <label for="message">Additional Details:</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Enter any additional details..."></textarea>
-                </div>
+      <div class="form-group">
+        <label for="message">📝 Additional Details</label>
+        <textarea id="message" name="message" rows="4" placeholder="Tell us what your business needs..."></textarea>
+      </div>
 
-                <button type="submit" class="cta-button">Submit Appointment</button>
-                <p id="responseMessage"></p>
-            </form>
-        </section>
-    </main>
+      <div id="responseMessage" class="response-message" style="display: none;"></div>
 
-    <!-- Include Footer -->
-    <div id="footer"></div>
+      <button type="submit" class="cta-button">📅 Book Appointment</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer"></footer>
+
+  <!-- Appointment Submission Script -->
+  <script>
+    const form = document.getElementById("appointmentForm");
+    const phoneInput = document.getElementById("phone");
+    const responseMsg = document.getElementById("responseMessage");
+
+    const API_BASE = window.location.origin.includes("localhost")
+      ? "http://localhost:3002"
+      : "https://www.okdevs.xyz";
+
+    const SITE_KEY = "okdevs";
+
+    phoneInput.addEventListener("input", () => {
+      let cleaned = phoneInput.value.replace(/\D/g, "");
+      if (cleaned.length > 10) {
+        cleaned = cleaned.slice(0, 10);
+      }
+      phoneInput.value = cleaned;
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      payload.phone = payload.phone.replace(/\D/g, "");
+      payload.siteKey = SITE_KEY;
+
+      if (payload.phone.length !== 10) {
+        responseMsg.style.display = "block";
+        responseMsg.textContent = "Phone number must be exactly 10 digits.";
+        responseMsg.style.color = "crimson";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/appointments?site=${SITE_KEY}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        responseMsg.style.display = "block";
+
+        if (res.ok) {
+          responseMsg.textContent = data.message;
+          responseMsg.style.color = "limegreen";
+          form.reset();
+        } else {
+          responseMsg.textContent = data.error || "Something went wrong.";
+          responseMsg.style.color = "crimson";
+        }
+      } catch (err) {
+        console.error("Submission error:", err);
+        responseMsg.style.display = "block";
+        responseMsg.textContent = "Error submitting form.";
+        responseMsg.style.color = "crimson";
+      }
+    });
+  </script>
 </body>
 </html>
