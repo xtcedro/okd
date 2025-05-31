@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="OK Devs - Empowering Oklahoma developers and citizens through technology, innovation, and collaboration.">
   <title>OK Devs | Empowering Oklahoma 🚀</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script type="module" src="assets/js/script.js"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script type="module" src="/assets/js/script.js"></script>
 </head>
 <body>
 
@@ -18,7 +18,7 @@
   <main>
     <!-- Hero Section -->
     <section class="hero">
-      <img src="assets/images/banner.png" alt="OK Devs Banner" class="hero-banner">
+      <img src="/assets/images/banner.png" alt="OK Devs Banner" class="hero-banner">
       <h1>🚀 Welcome to OK Devs 🚀</h1>
       <p>
         🌟 OK Devs is a community-driven initiative dedicated to leveraging technology to empower Oklahoma.
@@ -40,8 +40,8 @@
     <!-- Open Letter Section -->
     <section class="media-container">
       <figure>
-        <a href="assets/pdfs/letter.pdf" target="_blank">
-          <img src="assets/images/thumbnail.jpeg" alt="Open Letter">
+        <a href="/assets/pdfs/letter.pdf" target="_blank">
+          <img src="/assets/images/thumbnail.jpeg" alt="Open Letter">
         </a>
         <figcaption>📄 Read Our Open Letter by Pedro M. Dominguez</figcaption>
       </figure>
@@ -50,7 +50,7 @@
     <!-- Video Section -->
     <section class="video-container">
       <h3>🎥 Video: Rethinking Humanity</h3>
-      <video src="assets/videos/rethinkinghumanity.mp4" controls></video>
+      <video src="../../assets/videos/rethinkinghumanity.mp4" controls></video>
       <p>Exploring the intersection of technology, humanity, and governance. 🌌</p>
     </section>
 
@@ -58,6 +58,21 @@
 
   <!-- Footer Section -->
   <div id="footer"></div>
+  <!-- Dynamic Settings Injection -->
+  <script>
+    fetch('/api/settings?site=okdevs')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('hero-headline').textContent = data.hero_headline;
+        document.getElementById('contact-email').textContent = data.contact_email;
+        document.getElementById('contact-email').href = `mailto:${data.contact_email}`;
+        document.getElementById('business-phone').textContent = data.business_phone;
+        document.getElementById('business-phone').href = `tel:${data.business_phone}`;
+      })
+      .catch(err => {
+        console.error("Failed to load site settings:", err.message);
+      });
+  </script>
 
 </body>
 </html>
