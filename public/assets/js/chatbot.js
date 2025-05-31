@@ -41,7 +41,7 @@ export function initializeChatbot(marked) {
         body: JSON.stringify({ page: currentPage })
       });
       const data = await response.json();
-      appendMessage("bot", "DenoGenesis AI Assistant 🤖", data.reply, true);
+      appendMessage("bot", "OK Devs  AI Assistant 🤖", data.reply, true);
     } catch (error) {
       console.error("❌ Intro fetch error:", error);
     }
@@ -62,7 +62,7 @@ export function initializeChatbot(marked) {
         body: JSON.stringify({ message, page: currentPage })
       });
       const data = await response.json();
-      appendMessage("bot", "DenoGenesis AI Assistant 🤖", data.reply, true);
+      appendMessage("bot", "OK Devs AI Assistant 🤖", data.reply, true);
     } catch (error) {
       appendMessage("error", "Error", "AI service is unavailable.");
     }
