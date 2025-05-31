@@ -1,5 +1,3 @@
-// navigation.js
-
 export function setupNavigation() {
   const navbar = document.querySelector(".navbar");
   if (!navbar) return;
@@ -9,7 +7,7 @@ export function setupNavigation() {
   const guestNav = `
     <div class="nav-left">
       <button class="hamburger-menu" id="menu-toggle" aria-label="Open navigation">☰</button>
-      <span class="nav-title">Dominguez Tech Solutions</span>
+      <span class="nav-title">OKDevs</span>
     </div>
     <div class="menu-container">
       <div class="sidebar hidden" id="sidebar-menu">
@@ -19,17 +17,13 @@ export function setupNavigation() {
         </div>
         <ul class="nav-links">
           <li><a href="../../pages/home/index.html">🏠 Home</a></li>
-          <li><a href="../../pages/about/about.html">🧑‍💻 About Us</a></li>
-          <li><a href="../../pages/services/services.html">🛠️ Services</a></li>
+          <li><a href="../../pages/about/about.html">👨‍💻 About</a></li>
+          <li><a href="../../pages/letter/letter.html">📄 Letter</a></li>
           <li><a href="../../pages/contact/contact.html">📬 Contact</a></li>
-          <li><a href="../../pages/payment/payment.html">💵 Make A Payment</a></li>
-          <li><a href="../../pages/appointments/appointment-booker.html">🗓️ Book an Appointment</a></li>
-          <li><a href="../../pages/chatbot/chatbot.html">🤖 AI Chatbot</a></li>
-          <li><a href="../../pages/blogs/blogs.html">📝 Blogs</a></li>
-          <li><a href="../../pages/projects/projects.html">📑 Projects</a></li>
+          <li><a href="../../pages/appointments/appointment-booker.html">🗓️ Book</a></li>
         </ul>
         <div class="nav-container">
-          <a href="../../pages/auth/login.html" class="nav-button" id="login-link">🫅 Admin Login</a>
+          <a href="../../pages/auth/login.html" class="nav-button" id="login-link">🔐 Admin Login</a>
         </div>
       </div>
       <div class="overlay hidden" id="menu-overlay"></div>
@@ -39,7 +33,7 @@ export function setupNavigation() {
   const adminNav = `
     <div class="nav-left">
       <button class="hamburger-menu" id="menu-toggle" aria-label="Open navigation">☰</button>
-      <span class="nav-title">Admin Panel - Dominguez Tech Solutions</span>
+      <span class="nav-title">Admin Panel - OKDevs</span>
     </div>
     <div class="menu-container">
       <div class="sidebar hidden" id="sidebar-menu">
@@ -50,11 +44,8 @@ export function setupNavigation() {
         <ul class="nav-links">
           <li><a href="../../pages/admin/dashboard.html">📊 Dashboard</a></li>
           <li><a href="../../pages/admin/manage-blogs.html">📝 Manage Blogs</a></li>
-          <li><a href="../../pages/admin/public-appointments.html">📋 Manage Appointments</a></li>
-          <li><a href="../../pages/admin/manage-projects.html">📝 Manage Projects</a></li>
-          <li><a href="../../pages/admin/transactions.html">💳 Transactions</a></li>
-          <li><a href="../../pages/admin/user-messages.html">📫 Inbox</a></li>
-          <li><a href="../../pages/admin/settings.html">⚙️ Settings</a></li>
+          <li><a href="../../pages/admin/manage-projects.html">📁 Manage Projects</a></li>
+          <li><a href="../../pages/admin/site-settings.html">⚙️ Site Settings</a></li>
         </ul>
         <div class="nav-container">
           <a href="#" class="nav-button" id="logout-link">🚪 Logout</a>
@@ -64,7 +55,6 @@ export function setupNavigation() {
     </div>
   `;
 
-  // Set correct nav (admin or guest)
   navbar.innerHTML = isAdmin ? adminNav : guestNav;
 
   const menuButton = document.getElementById("menu-toggle");
@@ -98,18 +88,17 @@ export function setupNavigation() {
     }
   });
 
-  // === Smart Highlight Current Page ===
+  // Highlight current page
   const currentPage = window.location.pathname.split("/").pop().toLowerCase();
 
   sidebarMenu.querySelectorAll(".nav-links a").forEach(link => {
     const linkPage = link.getAttribute("href").split("/").pop().toLowerCase();
-
     if (currentPage === linkPage) {
       link.classList.add("active");
     }
   });
 
-  // === Handle Logout
+  // Logout handler
   const logoutLink = document.getElementById("logout-link");
   if (logoutLink) {
     logoutLink.addEventListener("click", (e) => {
