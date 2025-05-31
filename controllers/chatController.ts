@@ -5,80 +5,86 @@ import { config as loadEnv } from "https://deno.land/x/dotenv@v3.2.2/mod.ts";
 const env = await loadEnv();
 const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
 
+// 🌟 OKDevs Chatbot System Prompt (Updated Email)
 const systemPrompt = `
-You are the Dominguez Tech Solutions AI Assistant, trained to assist with:
-- AI & web development
-- IT consulting
-- Business automation using NodeGenesis
-- Community education and digital empowerment
+You are the official AI Assistant for OKDevs — a grassroots tech initiative from Oklahoma, building structured web apps, ethical AI systems, and economic tools for the Age of Creation.
 
-Always respond clearly and helpfully. Use markdown-like formatting for bold text, bullet points, and links when helpful.
+You assist:
+- Local developers, civic leaders, small businesses, nonprofits, and educators
+- Anyone ready to adopt digital independence, ethical AI, and web automation
 
-Latest Offerings:
+Your tone is:
+- Clear, concise, inspiring
+- Technically helpful and community-centered
+- Focused on trust, sovereignty, and exponential access
 
-**🎓 Crash Course - AI & Web Dev**
-- 💰 $69 one-time
-- ✅ Lifetime access, projects included
-- 📍 OKC Metropolitan Library  
-- [Book Now](https://www.domingueztechsolutions.com/appointment-booker.html)
+Offerings:
 
-**🧩 Web Development Packages**
-- 🚀 Starter: $100 (responsive site, SEO)
-- 💼 Business: $200 (login, validation, analytics)
-- 🏆 Enterprise: $300 (Stripe, CMS, deployment)
+**⚙️ DenoGenesis Framework**
+- Backend + AI-ready modular stack for local tech apps
+- Open-source, scalable, fast to deploy
 
-**💡 Custom Work & Repairs**
-- Device repair, web systems, local business tech
+**🧠 HOPS (Hybrid Operational Prompt System)**
+- Structures AI execution under human control
+- Enables trusted, secure automation across industries
 
-📩 Contact:
-[domingueztechsolutions@gmail.com](mailto:domingueztechsolutions@gmail.com)
+**🗓️ Schedule a Session**
+- [Appointment Booker](https://okdevs.xyz/appointment-booker.html)
+
+**📄 Read the Open Letter**
+- [Digital States Letter](https://okdevs.xyz/assets/pdfs/letter.pdf)
+
+**📩 Contact**
+- [domingueztechsolutions@gmail.com](mailto:domingueztechsolutions@gmail.com)
 `;
 
-// AI Chat Controller
 export const chatController = async (ctx: Context) => {
   try {
     const { value } = await ctx.request.body({ type: "json" });
-    const { message } = await value || {};
+    const { message, page } = await value || {};
 
-    // If no message provided, return intro prompt
     if (!message) {
       ctx.response.status = 200;
       ctx.response.body = {
         reply: `
-**Welcome to Dominguez Tech Solutions! ⚙️**
+**Welcome to OKDevs!** 🌐  
+We help local leaders, builders, and entrepreneurs thrive in the digital era.
 
-I'm your AI assistant. I can help you explore our crash course, web packages, or custom tech services.
+🗓️ **Book an Appointment:**  
+[Appointment Booker](https://okdevs.xyz/appointment-booker.html)
 
-🗓️ **Book your appointment:**  
-[Appointment Booker](https://www.domingueztechsolutions.com/appointment-booker.html)
+📄 **Read Our Vision:**  
+[Digital States Letter](https://okdevs.xyz/assets/pdfs/letter.pdf)
 
-📩 **Email us:**  
+📩 **Email:**  
 [domingueztechsolutions@gmail.com](mailto:domingueztechsolutions@gmail.com)
 
-How can I assist you today?
+How can I help you today?
         `
       };
       return;
     }
+
+    const pageContext = page ? `User is on page: ${page}` : "";
 
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const chat = await model.startChat({
       history: [],
       generationConfig: {
-        maxOutputTokens: 300,
-        temperature: 0.7,
+        maxOutputTokens: 350,
+        temperature: 0.65,
       },
     });
 
-    const response = await chat.sendMessage([systemPrompt, message]);
+    const response = await chat.sendMessage([systemPrompt + pageContext, message]);
     const botReply = response.response.text();
 
     ctx.response.status = 200;
     ctx.response.body = { reply: botReply };
   } catch (error) {
-    console.error("❌ AI Error:", error.message);
+    console.error("❌ Chatbot Error:", error.message);
     ctx.response.status = 500;
-    ctx.response.body = { error: "AI processing failed. Please try again later." };
+    ctx.response.body = { error: "AI assistant is currently unavailable. Please try again later." };
   }
 };
