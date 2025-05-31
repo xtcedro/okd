@@ -30,7 +30,7 @@ console.log("\x1b[36m%s\x1b[0m", "✨ Let's rebuild the web — together.\n");
 // === STATIC FILE MIDDLEWARE (Public Assets) ===
 app.use(async (ctx, next) => {
   const filePath = ctx.request.url.pathname;
-  const fileWhitelist = [".css", ".js", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".ttf", ".woff2", ".html"];
+  const fileWhitelist = [".css", ".js", ".png", ".jpg", ".jpeg", ".webp", ".svg", ".ico", ".ttf", ".woff2", ".mp4", ".html"];
 
   if (fileWhitelist.some(ext => filePath.endsWith(ext))) {
     try {
@@ -49,7 +49,7 @@ app.use(async (ctx, next) => {
 
 
 app.use(oakCors({
-  origin: "https://domingueztechsolutions.com",
+  origin: "https://okdevs.xyz",
   credentials: true, // allow cookies if needed
 }));
 
