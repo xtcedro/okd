@@ -25,7 +25,7 @@ export const db = await new Client().connect({
 try {
   const result = await db.execute("SELECT 1");
   console.log("✨===========================================✨");
-  console.log("✅ NodeGenesis Universal Database Connected");
+  console.log("✅ DenoGenesis Universal Database Connected");
   console.log("✨ Database:", dbConfig.db);
   console.log("✨ Host:", dbConfig.hostname);
   console.log("✨===========================================✨");
