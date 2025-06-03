@@ -8,8 +8,8 @@ const app = new Application();
 const port = parseInt(env.PORT || "3000");
 
 // === DENOGENESIS FRAMEWORK BOOTUP LOGS ===
-const version = "v1.3.0";
-const buildDate = "May 19, 2025";
+const version = "v1.4.0";
+const buildDate = "June 2, 2025";
 
 console.log("\x1b[35m%s\x1b[0m", "✨========================================================✨");
 console.log("\x1b[36m%s\x1b[0m", "         Welcome to the DenoGenesis Framework Engine");
