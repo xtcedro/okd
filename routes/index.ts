@@ -12,6 +12,8 @@ import dashboardRoutes from "./dashboardRoutes.ts";
 import settingsRoutes from "./settingsRoutes.ts";
 import stripeRoutes from "./stripeRoutes.ts";
 import projectRoutes from "./projectRoutes.ts";
+import roadmapRoutes from "./roadmapRoutes.ts";
+import searchRoutes from "./searchRoutes.ts";
 
 const router = new Router();
 
@@ -56,6 +58,12 @@ console.log("\x1b[36m%s\x1b[0m", "➡️  Stripe routes loaded at /api/stripe");
 
 router.use("/api/projects", projectRoutes.routes(), projectRoutes.allowedMethods());
 console.log("\x1b[36m%s\x1b[0m", "➡️  Projects routes loaded at /api/projects");
+
+router.use("/api/roadmap", roadmapRoutes.routes(), roadmapRoutes.allowedMethods());
+console.log("\x1b[36m%s\x1b[0m", "➡️  Roadmap routes loaded at /api/roadmap");
+
+router.use("/api/search", searchRoutes);
+console.log("\x1b[36m%s\x1b[0m", "➡️  RSearch routes loaded at /api/search");
 
 console.log("\x1b[32m%s\x1b[0m", "\n✅ All API routes successfully registered.");
 console.log("\x1b[33m%s\x1b[0m", "🚀 Your framework is modular, future-ready, and thriving.\n");
