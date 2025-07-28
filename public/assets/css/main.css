@@ -23,58 +23,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* === HERO SECTION === */
-.hero {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
-  padding: 6rem 2rem 5rem;
-  background: var(--primary-bg);
-  overflow: hidden;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--soft-gradient);
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero-banner {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.08;
-  z-index: 0;
-}
-
-.hero h1 {
-  position: relative;
-  z-index: 1;
-  font-size: 3rem;
-  color: var(--accent-gold);
-  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-  letter-spacing: 1.2px;
-  margin-bottom: 1.2rem;
-}
-
-.hero p {
-  position: relative;
-  z-index: 1;
-  max-width: 780px;
-  color: var(--primary-text);
-  font-size: 1.3rem;
-  line-height: 1.8;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-}
 
 /* === CONTENT SECTION === */
 .content-section {
